@@ -1,0 +1,73 @@
+variables:
+  GIT_CLEAN_FLAGS: "-dxf --exclude=dist/"
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+
+stages:
+  - lint
+  - clean
+  - build
+  - deploy
+
+lint:
+  stage: lint
+  image: node:20 # get tag from dockerhub
+  script:
+    - echo "Running Lint Check"
+    - npm ci
+    - npm run lint
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+
+clean:
+  stage: clean
+  environment: production
+  image: node:20 # get tag from dockerhub
+  script:
+    - echo "Cleaning node_modules and dist..."
+    - rm -rf node_modules dist
+    - echo "Cleaning Done."
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+build:
+  stage: build
+  environment: production
+  image: node:20 # get tag from dockerhub
+  before_script:
+    - echo "Install Dependencies"
+    - npm install
+  script:
+    - echo "Vite Build for mode production"
+    - npm run build -- --mode production
+  artifacts:
+    paths:
+      - dist/
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+deploy:
+  stage: deploy
+  environment: production
+  image:
+    name: amazon/aws-cli
+    entrypoint: ["/bin/sh", "-c"]
+  script:
+    - echo "Fetching secrets from AWS"
+    - export PORTAL_WEB_CUSTOMER_CLOUDFRONT_ID=$(aws secretsmanager get-secret-value --secret-id $SECRET_ID --query SecretString --output text | grep -o "\"PORTAL_WEB_CUSTOMER_CLOUDFRONT_ID\":\"[^\"]*" | grep -o '[^"]*$')
+    - export PORTAL_WEB_CUSTOMER_S3_BUCKET_NAME=$(aws secretsmanager get-secret-value --secret-id $SECRET_ID --query SecretString --output text | grep -o "\"PORTAL_WEB_CUSTOMER_S3_BUCKET_NAME\":\"[^\"]*" | grep -o '[^"]*$')
+
+    - echo "Deploying dist/ to S3 $PORTAL_WEB_CUSTOMER_S3_BUCKET_NAME"
+    - aws s3 sync dist/ s3://$PORTAL_WEB_CUSTOMER_S3_BUCKET_NAME --delete
+
+    - echo "Creating CloudFront Invalidation $PORTAL_WEB_CUSTOMER_CLOUDFRONT_ID"
+    - aws cloudfront create-invalidation --distribution-id $PORTAL_WEB_CUSTOMER_CLOUDFRONT_ID --paths "/*" | tr -d '[:space:]' | grep -o '"Id":"[^"]*' |  grep -o '[^"]*$' | tee invalidationId
+    - aws cloudfront wait invalidation-completed --distribution-id $PORTAL_WEB_CUSTOMER_CLOUDFRONT_ID --id $(cat invalidationId)
+  needs:
+    - job: build
+      artifacts: true
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'

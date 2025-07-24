@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import 'react-phone-number-input/style.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.bottom-modal-wrapper .ant-modal {
+    margin-top: 0; 
+    bottom: unset !important;
+}
+
+.ui-config-modal {
+    &::after {
+        content: "";
+        background: #000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.5;
+    }
+    .ui-config-container {
+        position: relative;
+        z-index: 2;
+    }
+    .ui-config-column {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 16px;
+        height: 60vh;
+        max-width: 100%;
+    }
+    .ui-config-column-2 {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+    .column-selected-config {
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        padding-right: 10px;
+        padding-left: 0.8rem;
+    }
+    .ui-config-drag-items {
+        padding: 15px 7px 7px 10px;
+    }
+    .ui-config-scrollbar {
+        overflow-y: auto;
+        max-height: 60vh;
+    }
+
+    /* CSS ui config for site sketch, please do not overwrite this */
+    .ui-config-column-sketch {
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    .ui-config-column-2-sketch {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .column-selected-config-sketch {
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .ui-config-drag-items-sketch {
+        padding: 0 16px 16px 16px;
+    }
+    /* CSS ui config for site sketch, please do not overwrite this */
+}

@@ -1,0 +1,24 @@
+include: 
+  # Include CICD env develop - branch develop
+  - local: '.gitlab-ci.develop.yml'
+    rules:
+      - if: $CI_COMMIT_BRANCH == $BRANCH_DEVELOP
+      - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $BRANCH_DEVELOP'
+    
+  # Include CICD env staging - branch staging
+  - local: '.gitlab-ci.staging.yml'
+    rules:
+      - if: $CI_COMMIT_BRANCH == $BRANCH_RELEASE_STAGING
+      - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $BRANCH_RELEASE_STAGING'
+
+  # Include CICD env production - branch main
+  - local: '.gitlab-ci.production.yml'
+    rules:
+      - if: $CI_COMMIT_BRANCH == $BRANCH_RELEASE_PRODUCTION
+      - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $BRANCH_RELEASE_PRODUCTION'
+
+  # Include default
+  - local: '.gitlab-ci.default.yml'
+    rules:
+      - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH != $BRANCH_DEVELOP && $CI_COMMIT_BRANCH != $BRANCH_RELEASE_STAGING && $CI_COMMIT_BRANCH != $BRANCH_RELEASE_PRODUCTION'
+      - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $BRANCH_DEVELOP && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $BRANCH_RELEASE_STAGING && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != $BRANCH_RELEASE_PRODUCTION'

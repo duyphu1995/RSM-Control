@@ -1,0 +1,16 @@
+.ant-breadcrumb.breadcrumb {
+  margin-bottom: 24px;
+}
+
+.ant-breadcrumb.breadcrumb ol li {
+  line-height: 140%;
+  color: #767676;
+}
+
+.ant-breadcrumb.breadcrumb ol li:nth-last-child(1) {
+  color: #000000;
+}
+
+.ant-breadcrumb.breadcrumb a {
+  color: #767676;
+}

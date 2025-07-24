@@ -1,0 +1,49 @@
+.table-row-light td {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    font-size: 14px !important;
+    color: #171717 !important;
+}
+.table-row-dark td {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    font-size: 14px !important;
+}
+
+.base-table .ant-table-thead > tr > th {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    color: #171717;
+    font-weight: 600;
+    font-style: normal; 
+    font-size: 14px;
+    font-family: 'Inter';
+    background-color: #F5F5F5 !important;
+}
+
+.base-table .ant-table-column-sorters {
+    width: fit-content;
+    gap: 10px;
+}
+
+.base-table .ant-table-thead > tr > th:hover {
+    background-color: #F5F5F5 !important;
+}
+
+.base-table .ant-table-cell {
+    border-right: none !important;
+}
+.base-table .ant-table-thead .ant-table-cell {
+    border-right: none !important;
+}
+
+
+.base-table .ant-table-tbody > tr > td:first-child,
+.base-table .ant-table-thead > tr > th:first-child {
+    border-left: 1px solid #f0f0f0 !important;
+}
+
+.base-table .ant-table-tbody > tr > td:last-child,
+.base-table .ant-table-thead > tr > th:last-child {
+    border-right: 1px solid #f0f0f0 !important;
+}

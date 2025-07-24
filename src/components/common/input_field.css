@@ -1,0 +1,167 @@
+.input-field-container {
+    position: relative;
+    border: 1px solid #D4D4D4;
+    border-radius: 8px;
+    height: 40px;
+    /* Typical height for Material Design inputs */
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.input-field-container.focused {
+    border-color: #F97316;
+    /* Primary color when focused */
+    border-width: 1px;
+    /* Make border thicker when focused */
+}
+
+/* Error state styling */
+.input-field-container.error {
+    border-color: #D32F2F;
+    /* Material Design Red A700 */
+}
+
+.input-field-container.focused.error {
+    /* Ensure focused error also has red border */
+    border-color: #D32F2F;
+}
+
+/* Label color in error state */
+.input-field-container.error .input-field-label {
+    color: #D32F2F;
+}
+
+.input-field-container.error {
+    margin-bottom: 20px;
+    /* Provide extra space for the error message */
+}
+
+.input-field-error-text {
+    position: absolute;
+    /* Position below the input field */
+    top: 40px;
+    width: calc(100% - 12px);
+    left: 12px;
+    /* Align with input padding */
+    font-size: 12px;
+    color: #DC2626;
+    /* Error red color */
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+}
+
+.input-field-container.has-password-toggle .input-field-input {
+    padding-right: 40px;
+    /* Space for the icon */
+}
+
+/* Adjust for thicker border when focused */
+.input-field-container.focused .input-field-label {
+    left: 12px;
+    /* Adjust to compensate for thicker border */
+    top: -12px;
+    /* Adjust to compensate for thicker border */
+}
+
+.input-field-input {
+    flex: 1;
+    width: 100%;
+    /* Take up available space */
+    padding: 0 12px;
+    /* Adjust padding as needed */
+    font-size: 14px;
+    border: none;
+    font-family: Inter, serif;
+    font-weight: normal;
+    background: transparent;
+    /* Essential for label background to show */
+    outline: none;
+    /* Remove default focus outline */
+    height: 100%;
+    /* Fill container height */
+    color: #333;
+}
+
+.input-field-label {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    /* Initial position in the center of the input */
+    font-size: 14px;
+    color: #888;
+    pointer-events: none;
+    /* Allows clicks to pass through to the input */
+    transition: top 0.2s ease-in-out, font-size 0.2s ease-in-out, color 0.2s ease-in-out, left 0.2s ease-in-out;
+    background-color: white;
+    /* Important: this "cuts" the border */
+    padding: 0 4px;
+    /* Padding for the background color to extend over the border */
+    z-index: 1;
+    /* Ensure label is above the border */
+
+}
+
+/* When the container has the 'shrunk-label' class */
+.input-field-container.shrunk-label .input-field-label {
+    top: -10px;
+    /* Move up */
+    font-family: Inter, serif;
+    font-weight: normal;
+    font-size: 12px;
+    /* Shrink font size */
+    background: white;
+}
+
+/* When the container is focused */
+.input-field-container.focused .input-field-label {
+    color: #404040;
+    /* Change label color to primary color */
+}
+
+/* Optional: Hide placeholder when label is shrunk to avoid overlap */
+.input-field-container.shrunk-label .input-field-input::placeholder {
+    color: transparent;
+}
+
+/* New styles for the password toggle icon */
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    /* Position to the right */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    /* Ensure icon is above label and input */
+    display: flex;
+    /* To center SVG */
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    /* Icon size */
+    height: 20px;
+}
+
+.password-toggle-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.input-field-container-disable {
+    background-color: #F5F5F5;
+}
+
+.input-field-label-disable-empty {
+    background-color: transparent !important;
+}
+
+.input-field-label-disable {
+    background: linear-gradient(to bottom, white 54%, transparent 50%) !important;
+}
+
+@media screen and (max-width: 640px) {
+    .input-field-error-text {
+        width: auto;
+    }
+}
