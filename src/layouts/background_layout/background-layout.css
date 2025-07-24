@@ -1,0 +1,79 @@
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.background-overlay {
+    position: absolute;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.test {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.background-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.login-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    z-index: 2;
+    text-align: center;
+    position: relative;
+}
+
+.error-container {
+    margin-top: 40px;
+    background-color: #FEE2E2;
+    color: #DC2626;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: flex;
+    text-align: start;
+    align-items: center;
+    font-size: 14px;
+    font-family: Inter, sans-serif;
+}
+
+.ant-modal-title {
+    font-size: 18px !important;
+}
+
+button {
+    height: 40px;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+button.close {
+    font-size: 18px!important;
+    height: auto;
+}
+
+button.btn-calendar {
+    font-weight: 400 !important;
+}

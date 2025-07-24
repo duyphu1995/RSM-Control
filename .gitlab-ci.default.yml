@@ -1,0 +1,17 @@
+# Default never runs
+variables:
+  RUN: "0"
+
+workflow:
+  rules:
+    - if: $RUN == "1"
+      when: always
+
+stages:
+  - default
+
+default:
+  stage: default
+  environment: default
+  script:
+    - echo "Stage Default"

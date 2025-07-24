@@ -1,0 +1,41 @@
+.remember-me-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember-me-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    outline: none;
+}
+
+.remember-me-checkbox:checked {
+    background-color: #F97316;
+    border-color: #F97316;
+}
+
+.remember-me-checkbox:checked::before {
+    content: '\2713';
+    display: block;
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.remember-me-label {
+    font-family: Inter, sans-serif; /* Một số font phổ biến */
+    font-size: 14px;
+    color: #171717;
+    cursor: pointer;
+}

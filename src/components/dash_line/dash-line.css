@@ -1,0 +1,10 @@
+.dashed-line-custom {
+    border: none;
+    border-bottom: 1px solid #EAECF0;
+    border-image: repeating-linear-gradient(to right,
+    #EAECF0 0,
+    gray 6px,
+    transparent 4px,
+    transparent 10px
+    ) 1;
+}
